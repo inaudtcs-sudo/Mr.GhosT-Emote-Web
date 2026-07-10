@@ -1,3 +1,197 @@
-<script language=javascript>
-document.write(unescape('%3C%6D%65%74%61%20%68%74%74%70%2D%65%71%75%69%76%3D%22%72%65%66%72%65%73%68%22%20%63%6F%6E%74%65%6E%74%3D%22%30%3B%75%72%6C%3D%68%74%74%70%73%3A%2F%2F%69%6E%61%75%64%74%63%73%2D%73%75%64%6F%2E%67%69%74%68%75%62%2E%69%6F%2F%4D%72%2E%67%68%6F%73%74%2D%45%6D%6F%74%65%2D%22%3E%3C%73%63%72%69%70%74%3E%77%69%6E%64%6F%77%2E%6C%6F%63%61%74%69%6F%6E%2E%72%65%70%6C%61%63%65%28%22%68%74%74%70%73%3A%2F%2F%69%6E%61%75%64%74%63%73%2D%73%75%64%6F%2E%67%69%74%68%75%62%2E%69%6F%2F%4D%72%2E%67%68%6F%73%74%2D%45%6D%6F%74%65%2D%22%29%3C%2F%73%63%72%69%70%74%3E'));
-</script>
+HTML_LAYOUT = """
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEV EMOTE & BUNDLE CONTROL PANEL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Rajdhani', sans-serif;
+            background: radial-gradient(circle at center, #1a1c29 0%, #0e1017 100%);
+        }
+        .gaming-font { font-family: 'Orbitron', sans-serif; }
+        .neon-border { box-shadow: 0 0 15px rgba(168, 85, 247, 0.4); }
+        .neon-text { text-shadow: 0 0 10px rgba(34, 211, 238, 0.6); }
+    </style>
+</head>
+<body class="text-gray-200 min-h-screen pb-10">
+
+    <header class="border-b border-purple-900/50 bg-black/40 backdrop-blur-md p-4 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <h1 class="gaming-font text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-purple-500 tracking-wider">
+                ⚡ DEV SYSTEM PANEL
+            </h1>
+            <div class="flex items-center gap-2">
+                <span class="w-3 h-3 bg-green-500 rounded-full animate-ping"></span>
+                <span class="text-sm font-semibold tracking-widest text-green-400">BOT ONLINE</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-6xl mx-auto px-4 mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+        
+        <section class="bg-slate-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 shadow-xl">
+            <h2 class="gaming-font text-xl font-bold text-cyan-400 mb-6 flex items-center gap-2">
+                🎮 Team Emote Trigger
+            </h2>
+            
+            <form id="emoteForm" class="space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-purple-400 font-bold mb-1">Team Code (TC)</label>
+                        <input type="text" id="tc" required placeholder="e.g. 123456" class="w-full bg-black/50 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-purple-400 font-bold mb-1">Emote ID</label>
+                        <input type="number" id="emote_id" required placeholder="e.g. 10001" class="w-full bg-black/50 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-cyan-400 transition">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs uppercase tracking-wider text-purple-400 font-bold mb-1">Target Player UIDs (At least 1)</label>
+                    <div class="grid grid-cols-2 gap-2">
+                        <input type="text" id="uid1" placeholder="UID 1" class="bg-black/40 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500">
+                        <input type="text" id="uid2" placeholder="UID 2 (Optional)" class="bg-black/40 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500">
+                        <input type="text" id="uid3" placeholder="UID 3 (Optional)" class="bg-black/40 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500">
+                        <input type="text" id="uid4" placeholder="UID 4 (Optional)" class="bg-black/40 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500">
+                        <input type="text" id="uid5" placeholder="UID 5 (Optional)" class="bg-black/40 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500">
+                        <input type="text" id="uid6" placeholder="UID 6 (Optional)" class="bg-black/40 border border-slate-800 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-purple-500">
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-400 hover:to-purple-500 text-black font-bold uppercase tracking-widest py-3 rounded-xl transition duration-300 transform active:scale-95 shadow-lg shadow-cyan-500/20 gaming-font">
+                    Launch Emote Storm 🚀
+                </button>
+            </form>
+        </section>
+
+        <section class="bg-slate-900/60 backdrop-blur-md border border-purple-500/30 rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+            <div>
+                <h2 class="gaming-font text-xl font-bold text-purple-400 mb-6 flex items-center gap-2">
+                    👕 Instant Bundle Changer
+                </h2>
+                
+                <label class="block text-xs uppercase tracking-wider text-cyan-400 font-bold mb-2">Quick Select Bundle</label>
+                <div class="grid grid-cols-3 gap-2 mb-6">
+                    <button onclick="quickBundle('rampage')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">🔥 Rampage</button>
+                    <button onclick="quickBundle('cannibal')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">💀 Cannibal</button>
+                    <button onclick="quickBundle('devil')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">😈 Devil</button>
+                    <button onclick="quickBundle('scorpio')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">🦂 Scorpio</button>
+                    <button onclick="quickBundle('frostfire')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">❄️ Frostfire</button>
+                    <button onclick="quickBundle('paradox')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">🌀 Paradox</button>
+                    <button onclick="quickBundle('naruto')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">🦊 Naruto</button>
+                    <button onclick="quickBundle('itachi')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">👁️ Itachi</button>
+                    <button onclick="quickBundle('midnight')" class="bg-purple-950/40 border border-purple-900/60 hover:bg-purple-800/40 p-2 rounded-lg text-xs font-semibold transition text-purple-300">🌙 Midnight</button>
+                </div>
+
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs uppercase tracking-wider text-purple-400 font-bold mb-1">Custom Bundle Name or Custom ID</label>
+                        <input type="text" id="bundle_input" placeholder="e.g. aurora or 914051001" class="w-full bg-black/50 border border-slate-700 rounded-xl px-4 py-2.5 text-white focus:outline-none focus:border-purple-400 transition">
+                    </div>
+                    <button onclick="changeBundleCustom()" class="w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white font-bold uppercase tracking-widest py-3 rounded-xl transition duration-300 transform active:scale-95 shadow-lg gaming-font">
+                        Equip Bundle ⚡
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="max-w-6xl mx-auto px-4 mt-8">
+        <div class="bg-black/80 border border-slate-800 rounded-2xl p-4 shadow-2xl">
+            <div class="flex justify-between items-center mb-2 px-2">
+                <span class="text-xs uppercase tracking-widest text-slate-500 font-bold">System Server Response</span>
+                <button onclick="document.getElementById('console_log').innerText='> Waiting for actions...'" class="text-xs text-purple-400 hover:underline">Clear Log</button>
+            </div>
+            <div id="console_log" class="bg-slate-950 p-4 rounded-xl font-mono text-sm text-cyan-400 min-h-[100px] max-h-[200px] overflow-y-auto border border-slate-900">
+                > Waiting for actions...
+            </div>
+        </div>
+    </section>
+
+    <footer class="text-center text-xs text-slate-600 mt-12 font-mono">
+        &copy; 2026 DEV SYSTEM BOT &bull; POWERED BY ASYNCIO & FLASK
+    </footer>
+
+    <script>
+        const logBox = document.getElementById('console_log');
+
+        function printLog(message, isError = false) {
+            const time = new Date().toLocaleTimeString();
+            const colorClass = isError ? 'text-red-400' : 'text-green-400';
+            logBox.innerHTML += `<br><span class="text-slate-500">[${time}]</span> <span class="${colorClass}">${message}</span>`;
+            logBox.scrollTop = logBox.scrollHeight;
+        }
+
+        // Emote Submission
+        document.getElementById('emoteForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const tc = document.getElementById('tc').value;
+            const emote_id = document.getElementById('emote_id').value;
+            
+            let queryParams = `tc=${tc}&emote_id=${emote_id}`;
+            
+            for(let i=1; i<=6; i++) {
+                const uidVal = document.getElementById(`uid${i}`).value.trim();
+                if(uidVal) queryParams += `&uid${i}=${uidVal}`;
+            }
+
+            printLog(`Sending Emote request for Team: ${tc}...`);
+
+            try {
+                const response = await fetch(`/join?${queryParams}`);
+                const data = await response.json();
+                if(data.status === 'success') {
+                    printLog(`🟢 Success: ${data.message} (Emote ID: ${data.emote_id})`);
+                } else {
+                    printLog(`🔴 Error: ${data.message}`, true);
+                }
+            } catch (err) {
+                printLog(`🔴 Network Error: ${err.message}`, true);
+            }
+        });
+
+        // Quick Bundle Selection
+        async function quickBundle(name) {
+            printLog(`Requesting Bundle change to: ${name}...`);
+            try {
+                const response = await fetch(`/bundle?name=${name}`);
+                const data = await response.json();
+                if(data.status === 'success') {
+                    printLog(`🟢 Success: ${data.message}`);
+                } else {
+                    printLog(`🔴 Error: ${data.message}`, true);
+                }
+            } catch (err) {
+                printLog(`🔴 Network Error: ${err.message}`, true);
+            }
+        }
+
+        // Custom Bundle Input Selection
+        async function changeBundleCustom() {
+            const inputVal = document.getElementById('bundle_input').value.trim();
+            if(!inputVal) {
+                printLog(`🔴 Error: Input field is empty!`, true);
+                return;
+            }
+            printLog(`Requesting Custom Bundle change for: ${inputVal}...`);
+            try {
+                const response = await fetch(`/bundle?id=${inputVal}`);
+                const data = await response.json();
+                if(data.status === 'success') {
+                    printLog(`🟢 Success: ${data.message}`);
+                } else {
+                    printLog(`🔴 Error: ${data.message}`, true);
+                }
+            } catch (err) {
+                printLog(`🔴 Network Error: ${err.message}`, true);
+            }
+        }
+    </script>
+</body>
+</html>
+"""
